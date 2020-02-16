@@ -7,8 +7,8 @@
 鸡蛋用css实现很简单，不再赘述。需要注意的是鸡蛋的位置是随机生成的，
 需要使用Math.random()函数。
 ```javascript
-let eggX=Math.floor(Math.random()*10)
-let eggY=Math.floor(Math.random()*10)
+let eggX=Math.floor(Math.random()*10)//鸡蛋横坐标
+let eggY=Math.floor(Math.random()*10)//鸡蛋纵坐标
 ```
 
 ### 蛇的活动
@@ -18,8 +18,9 @@ let eggY=Math.floor(Math.random()*10)
 ```javascript
 let snakeArr=[{x:0,y:0}]
 ```
-ArrowUp方向的坐标值计算方法不一样。以向上移动为例，每
-上移一个块，y轴坐标减1(坐标轴从0开始)
+不同方向的坐标值计算方法不一样。以向上移动为例，每
+上移一个块，y轴坐标减1(坐标轴从0开始)。移动方向可以通过
+键盘事件监听。
 ```javascript
 document.addEventListener('keydown',function(e){
     if(e.key==='ArrowUp'){
@@ -62,7 +63,20 @@ document.addEventListener('keydown',function(e){
 ### 碰撞检测
 蛇碰到墙壁后，游戏结束。怎么检测到蛇是否碰壁？
 
-超出活动区域即碰壁，即蛇头的横坐标小于0或者大于9,或者纵坐标小于0大于9
+蛇的位置越界，超出活动区域即碰壁
+
+### 自动移动的蛇
+上述步骤只实现了按上下左右四个方向的键让蛇开始移动，需要让蛇自动移动。
+
+作者使用的是定时器:setInterval,可以触发多次。在碰撞后清除定时器，游戏结束。
+```javascript
+function move() {
+  //...
+}
+setInterval(function () {
+    move();
+},1000)
+```
 
 ## 作者
 * **lyllovelemon** - *Initial work* - [PurpleBooth](https://github.com/lyllovelemon)
